@@ -1,1 +1,3 @@
-# CS375-Final-Brainstrom
+# retroShot
+
+Final project for CS 375
