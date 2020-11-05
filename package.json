@@ -1,0 +1,10 @@
+{
+  "name": "retroShot",
+  "version": "1.0.0",
+  "description": "Final project for CS 375",
+  "author": "retroShot Team",
+  "private": true,
+  "repository": "git@github.com:thehappydinoa/retroShot.git",
+  "license": "MIT",
+  "workspaces": ["server", "client"]
+}
