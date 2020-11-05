@@ -6,5 +6,17 @@
   "private": true,
   "repository": "git@github.com:thehappydinoa/retroShot.git",
   "license": "MIT",
-  "workspaces": ["server", "client"]
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "server": "yarn workspace server watch",
+    "client": "yarn workspace client watch",
+    "start": "concurrently \"yarn run server\" \"yarn run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
 }
