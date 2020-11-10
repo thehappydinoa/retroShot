@@ -8,7 +8,9 @@
   "license": "MIT",
   "workspaces": [
     "server",
-    "client"
+    "client",
+    "functions",
+    "scraper"
   ],
   "scripts": {
     "server": "yarn workspace server watch",
