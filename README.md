@@ -14,3 +14,16 @@ yarn
 
 ```sh
 ```
+
+## Docs
+
+```js
+let shot = {
+  postId: 123,
+  user: "user123",
+  url: "https://...",
+  year: 2019,
+  // If year is none decade will be used, if neither an error will be thrown
+  decade: "2010s",
+};
+```
