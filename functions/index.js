@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const { app } = require("./server");
 
-const appFunction = functions.https.onRequest((request, response) => {
+const api = functions.https.onRequest((request, response) => {
   if (!request.path) {
     request.url = `/${request.url}`; // Prepend '/' to keep query params if any
   }
@@ -14,5 +14,5 @@ const appFunction = functions.https.onRequest((request, response) => {
 });
 
 module.exports = {
-  appFunction,
+  api,
 };
