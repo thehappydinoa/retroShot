@@ -1,19 +1,31 @@
-const functions = require('firebase-functions');
+const admin = require("firebase-admin");
+const { validationResult } = require("express-validator");
 
-createShot = (req, res) => {}
+createShot = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-createShots = (req, res) => {}
+  let shot = req.body;
+  shot.dateAdded = admin.firestore.Timestamp.now();
 
-updateShot = async (req, res) => {}
+  const writeResult = await admin.firestore().collection("shots").add(shot);
 
-deleteShot = async (req, res) => {}
+  return res.json({ result: `Shot with ID: ${writeResult.id} added.` });
+};
 
-getShotById = async (req, res) => {}
+createShots = async (req, res) => {};
 
-getShots = async (req, res) => {}
+updateShot = async (req, res) => {};
 
-getRandomShot = async (req, res) => {}
+deleteShot = async (req, res) => {};
 
+getShotById = async (req, res) => {};
+
+getShots = async (req, res) => {};
+
+getRandomShot = async (req, res) => {};
 
 module.exports = {
   createShot,
@@ -22,5 +34,5 @@ module.exports = {
   deleteShot,
   getShotById,
   getShots,
-  getRandomShot
-}
+  getRandomShot,
+};
