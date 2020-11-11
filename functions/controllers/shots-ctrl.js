@@ -4,11 +4,11 @@ createShot = (req, res) => {}
 
 createShots = (req, res) => {}
 
-updateShot = (req, res) => {}
+updateShot = async (req, res) => {}
 
-deleteShot = (req, res) => {}
+deleteShot = async (req, res) => {}
 
-getShotById = (req, res) => {}
+getShotById = async (req, res) => {}
 
 getShots = async (req, res) => {}
 
