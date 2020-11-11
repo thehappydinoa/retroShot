@@ -7,7 +7,6 @@
   "repository": "git@github.com:thehappydinoa/retroShot.git",
   "license": "MIT",
   "workspaces": [
-    "server",
     "client",
     "functions",
     "scraper"
