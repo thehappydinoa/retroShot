@@ -12,13 +12,14 @@ async function fetchShots(postsPerRequest = 100) {
       posts.forEach((post) => {
         let data = post.data;
 
+        let isValidImg = data.url.slice(-4) === ".png" || data.url.slice(-4) === ".jpg"
         // Exclude video and NSFW posts
-        if (data.is_video || data.over_18) {
+        if (data.is_video || data.over_18 || !isValidImg) {
           return;
         }
-
+				
         // Match exact years or decades
-        let regex = /\d{4}([’']?s)?/g;
+        let regex = /[12]\d{3}([’']?s)?/g;
         let title = data.title;
         let matches = title.match(regex);
 
@@ -47,7 +48,6 @@ async function fetchShots(postsPerRequest = 100) {
         };
         shots.push(shot);
       });
-
       return shots;
     })
     .catch(console.warn);
