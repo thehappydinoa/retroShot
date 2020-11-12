@@ -1,4 +1,0 @@
-mypy
-black
-flake8
-firebase-admin
