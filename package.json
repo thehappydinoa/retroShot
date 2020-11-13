@@ -13,7 +13,8 @@
   "scripts": {
     "server": "yarn workspace server watch",
     "client": "yarn workspace client watch",
-    "start": "concurrently \"yarn run server\" \"yarn run client\""
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "functions": "yarn workspace functions serve"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

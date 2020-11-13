@@ -25,16 +25,17 @@ const shotValidator = [
   body("postUrl").isURL(),
   body("imgUrl").not().isEmpty().trim(),
   body("imgUrl").isURL(),
-  oneOf([body("year").isInt(), body("decade").isString()]),
+  oneOf([body("year").isInt().toInt(), body("decade").isString()]),
 ];
 
 const shotUpdaterValidator = [
-  body("user").not().isEmpty().trim(),
-  body("postUrl").not().isEmpty().trim(),
-  body("postUrl").isURL(),
-  body("imgUrl").not().isEmpty().trim(),
-  body("imgUrl").isURL(),
-  oneOf([body("year").isInt(), body("decade").isString()]),
+  oneOf([
+    body("user").not().isEmpty().trim(),
+    body("postUrl").not().isEmpty().trim(),
+    body("imgUrl").not().isEmpty().trim(),
+    body("year").isInt(),
+    body("decade").not().isEmpty().trim(),
+  ]),
 ];
 
 module.exports = {
