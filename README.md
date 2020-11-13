@@ -4,7 +4,7 @@ Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`]
 
 ## Install
 
-This project uses `Yarn`, get started with `Yarn` [here](https://yarnpkg.com/getting-started/install).
+This project uses `Yarn` Workspaces, get started with `Yarn` [here](https://yarnpkg.com/getting-started/install).
 
 ```sh
 yarn
