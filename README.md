@@ -1,18 +1,19 @@
-# retroShot
+# retroShot [![Node 10](https://img.shields.io/badge/node-v10.0-orange)](https://nodejs.org/en/download/releases/) [![API Docs](https://img.shields.io/badge/api%20docs-passing-green)](https://documenter.getpostman.com/view/4309917/TVenfoyk)
 
 Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`](https://www.reddit.com/r/OldSchoolCool/) where images are gathered and the user is asked to guess the year.
 
-This project uses `Yarn`, get started with `Yarn` [here](https://yarnpkg.com/getting-started/install).
-
 ## Install
+
+This project uses `Yarn`, get started with `Yarn` [here](https://yarnpkg.com/getting-started/install).
 
 ```sh
 yarn
 ```
 
-## Usage
+## Functions
 
 ```sh
+yarn functions
 ```
 
 ## Docs
