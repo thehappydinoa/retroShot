@@ -14,8 +14,8 @@ router.get("/shots", ShotsCtrl.getShots);
 router.post("/shot", shotValidator, ShotsCtrl.createShot);
 router.put("/shot/:id", shotUpdaterValidator, ShotsCtrl.updateShot);
 router.delete("/shot/:id", ShotsCtrl.deleteShot);
-router.get("/shot/:id", ShotsCtrl.getShotById);
 router.get("/shot/random", ShotsCtrl.getRandomShot);
+router.get("/shot/:id", ShotsCtrl.getShotById);
 router.post("/refresh", ShotsCtrl.refreshShots);
 
 module.exports = router;
