@@ -5,18 +5,16 @@ const app = express();
 
 const router = require("./routes");
 
-// const host = "localhost";
-// const apiPort = 5000;
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use("/", router);
+app.use((req, res, next) => {
+  res.header("X-powered-by", "Caffeine");
+  next();
+});
 
-// app.listen(apiPort, () =>
-//   console.log(`Server running on port http://${host}:${apiPort}`)
-// );
+app.use("/", router);
 
 module.exports = {
   app,
