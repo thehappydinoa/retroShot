@@ -14,13 +14,21 @@ Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`]
 This project uses `Yarn` Workspaces.
 
 ```sh
-yarn
+yarn install
 ```
 
-## Functions
+## Usage
+
+### Serve Functions
 
 ```sh
-yarn functions
+yarn serve
+```
+
+### Scrape Functions
+
+```sh
+yarn scrape
 ```
 
 ## Docs
@@ -28,6 +36,7 @@ yarn functions
 ```js
 let shot = {
   postId: 123,
+  title: "Test Title",
   user: "user123",
   url: "https://...",
   year: 2019,
