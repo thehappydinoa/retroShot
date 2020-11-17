@@ -13,6 +13,13 @@ const api = functions.https.onRequest((request, response) => {
   return app(request, response);
 });
 
+const { scraper } = require("./scraper");
+
+const scrape = functions.pubsub
+  .schedule("0 18 * * *")
+  .onRun((context) => scraper());
+
 module.exports = {
   api,
+  scrape,
 };
