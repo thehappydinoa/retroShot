@@ -2,9 +2,16 @@
 
 Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`](https://www.reddit.com/r/OldSchoolCool/) where images are gathered and the user is asked to guess the year.
 
+## Resources
+
+- [API Documentation](https://documenter.getpostman.com/view/4309917/TVenfoyk)
+- [`node` Download](https://nodejs.org/en/download/releases/)
+- [`yarn` Install](https://yarnpkg.com/getting-started/install)
+- [`r/OldSchoolCool`](https://www.reddit.com/r/OldSchoolCool/)
+
 ## Install
 
-This project uses `Yarn` Workspaces, get started with `Yarn` [here](https://yarnpkg.com/getting-started/install).
+This project uses `Yarn` Workspaces.
 
 ```sh
 yarn
