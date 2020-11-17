@@ -1,6 +1,6 @@
 /* eslint prefer-promise-reject-errors: "off" */
 const admin = require("firebase-admin");
-const { body, oneOf } = require("express-validator");
+const { body, query, oneOf } = require("express-validator");
 
 const validatePostId = async (postId) => {
   let query = admin
@@ -17,29 +17,39 @@ const validatePostId = async (postId) => {
   return Promise.resolve();
 };
 
-const shotValidator = [
-  body("postId").not().isEmpty().trim(),
-  body("postId").custom(validatePostId),
-  body("user").not().isEmpty().trim(),
-  body("postUrl").not().isEmpty().trim(),
-  body("postUrl").isURL(),
-  body("imgUrl").not().isEmpty().trim(),
-  body("imgUrl").isURL(),
-  oneOf([body("year").isInt().toInt(), body("decade").isString()]),
-];
+const urlOptions = {
+  protocols: ["https"],
+  require_tld: true,
+  require_protocol: true,
+  require_host: true,
+  require_valid_protocol: true,
+  allow_underscores: false,
+  allow_trailing_dot: false,
+  allow_protocol_relative_urls: false,
+  disallow_auth: true,
+};
 
-const shotUpdaterValidator = [
+const shotValidator = [
+  body("title").not().isEmpty().trim(),
+  body("postId").not().isEmpty().trim().custom(validatePostId),
+  body("user").not().isEmpty().trim(),
+  body("postUrl").not().isEmpty().isURL(urlOptions).trim(),
+  body("imgUrl").not().isEmpty().isURL(urlOptions).trim(),
   oneOf([
-    body("user").not().isEmpty().trim(),
-    body("postUrl").not().isEmpty().trim(),
-    body("imgUrl").not().isEmpty().trim(),
-    body("year").isInt(),
-    body("decade").not().isEmpty().trim(),
+    body("year").not().isEmpty().isInt().toInt(),
+    body("decade").not().isEmpty().isInt().toInt(),
   ]),
 ];
+
+const shotUpdaterValidator = [oneOf(shotValidator)];
+
+const getShotValidator = [
+  query("type").optional().isIn(["year", "decade"]).isString()
+]
 
 module.exports = {
   validatePostId,
   shotValidator,
   shotUpdaterValidator,
+  getShotValidator,
 };
