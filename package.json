@@ -11,13 +11,12 @@
     "functions"
   ],
   "scripts": {
-    "server": "yarn workspace server watch",
     "client": "yarn workspace client watch",
-    "start": "concurrently \"yarn run server\" \"yarn run client\"",
-    "functions": "yarn workspace functions serve"
+    "start": "yarn run client",
+    "functions": "yarn workspace functions serve",
+    "scrape": "yarn workspace functions scrape"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
   }
 }

@@ -102,9 +102,17 @@ getShotById = async (req, res) => {
 };
 
 getShots = async (req, res) => {
+  const shotType = req.query.type;
+
   let collectionRef = firestore.collection("shots");
 
-  let querySnapshot = await collectionRef.get();
+  let queryRef = collectionRef;
+
+  if (shotType) {
+    queryRef = collectionRef.where(shotType, "!=", null);
+  }
+
+  let querySnapshot = await queryRef.get();
 
   if (!querySnapshot.size) {
     return res.status(404).json({ success: false, error: "Shot not found" });
@@ -115,13 +123,23 @@ getShots = async (req, res) => {
     shots[documentSnapshot.ref.id] = documentSnapshot.data();
   });
 
-  return res.status(200).json({ success: true, data: shots });
+  return res
+    .status(200)
+    .json({ success: true, length: shots.length, data: shots });
 };
 
 getRandomShot = async (req, res) => {
+  const shotType = req.query.type;
+
   let collectionRef = firestore.collection("shots");
 
-  let querySnapshot = await collectionRef.get();
+  let queryRef = collectionRef;
+
+  if (shotType) {
+    queryRef = collectionRef.where(shotType, "!=", null);
+  }
+
+  let querySnapshot = await queryRef.get();
 
   if (!querySnapshot.size) {
     return res.status(404).json({ success: false, error: `Shot not found` });
@@ -150,8 +168,6 @@ getRandomShot = async (req, res) => {
     });
 };
 
-refreshShots = async (req, res) => {};
-
 module.exports = {
   createShot,
   updateShot,
@@ -159,5 +175,4 @@ module.exports = {
   getShotById,
   getShots,
   getRandomShot,
-  refreshShots,
 };
