@@ -4,10 +4,11 @@ Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`]
 
 ## Resources
 
-- [API Documentation](https://documenter.getpostman.com/view/4309917/TVenfoyk)
 - [`node` Download](https://nodejs.org/en/download/releases/)
 - [`yarn` Install](https://yarnpkg.com/getting-started/install)
 - [`r/OldSchoolCool`](https://www.reddit.com/r/OldSchoolCool/)
+- [API Documentation](https://documenter.getpostman.com/view/4309917/TVenfoyk)
+- API Deployed to [`https://us-central1-retroshot-6a964.cloudfunctions.net/api`](https://us-central1-retroshot-6a964.cloudfunctions.net/api)
 
 ## Install
 
