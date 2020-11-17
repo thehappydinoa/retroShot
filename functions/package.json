@@ -10,7 +10,7 @@
     "serve": "firebase emulators:start --only functions,firestore,auth",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions,firestore,auth",
+    "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "scrape": "node scraper.js"
   },
