@@ -84,4 +84,5 @@ if (require.main === module) {
 
 module.exports = {
   fetchShots,
+  scraper: main,
 };
