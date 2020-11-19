@@ -15,8 +15,5 @@
     "start": "yarn run client",
     "functions": "yarn workspace functions serve",
     "scrape": "yarn workspace functions scrape"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
   }
 }
