@@ -9,16 +9,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/functions" # Location of package manifests
-    schedule:
-      interval: "daily"
-      
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/client" # Location of package manifests
-    schedule:
-      interval: "daily"
       
   - package-ecosystem: "github-actions"
     # Workflow files stored in the
