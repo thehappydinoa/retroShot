@@ -3,7 +3,7 @@
   "description": "Cloud Functions for Firebase",
   "version": "1.0.0",
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "scripts": {
     "lint": "eslint .",
