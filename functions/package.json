@@ -19,7 +19,7 @@
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express-validator": "^6.6.1",
-    "firebase-admin": "^9.2.0",
+    "firebase-admin": "^9.4.1",
     "firebase-functions": "^3.11.0"
   },
   "devDependencies": {
