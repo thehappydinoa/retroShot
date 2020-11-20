@@ -104,14 +104,14 @@
     retry-request "^4.1.1"
     teeny-request "^7.0.0"
 
-"@google-cloud/firestore@^4.0.0":
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/firestore/-/firestore-4.7.0.tgz#8a176e41773b2a06320e1281d93994624b321541"
-  integrity sha512-srkT0LxbKBEo3hWlgjJenT6+bPJK4D+vuKiV/EZFc6sWhDNQwgOgKF6Rf16mggHwKOL9Sx08Veu0BUaX1uyh4g==
+"@google-cloud/firestore@^4.5.0":
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/@google-cloud/firestore/-/firestore-4.7.1.tgz#d170c72ecda6286ebab460765511103362da7b21"
+  integrity sha512-Qici+WKB6uRdDS1S3CaxGrIaCl4Bck70DYSzA5dZFkTU03Jj5DKXC4PYeUkfCAiB4haj7tzx+2ye7rhLxPclhQ==
   dependencies:
     fast-deep-equal "^3.1.1"
     functional-red-black-tree "^1.0.1"
-    google-gax "^2.2.0"
+    google-gax "^2.9.2"
 
 "@google-cloud/paginator@^3.0.0":
   version "3.0.5"
@@ -968,10 +968,10 @@ find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-firebase-admin@^9.2.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-9.3.0.tgz#05f3efb1bb97f17b2c562f4b59820a381d2f903f"
-  integrity sha512-qMUITOp2QKLLc2o0/wSiDC2OO2knejjieZN/8Or9AzfFk8ftTcUKq5ALNlQXu+7aUzGe0IwSJq9TVnkIU0h1xw==
+firebase-admin@^9.4.1:
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-9.4.1.tgz#9b8704320dd8894dfa4acc70c66237323cba12ed"
+  integrity sha512-y9r2Mz2x1WTr60YrCDqz8Lw70DlwIvRIieVltP+UdRogkVpfnvyd+bi4D0KPlujW3teqcFPmxuzsXB+DP5vGfQ==
   dependencies:
     "@firebase/database" "^0.6.10"
     "@firebase/database-types" "^0.5.2"
@@ -980,7 +980,7 @@ firebase-admin@^9.2.0:
     jsonwebtoken "^8.5.1"
     node-forge "^0.10.0"
   optionalDependencies:
-    "@google-cloud/firestore" "^4.0.0"
+    "@google-cloud/firestore" "^4.5.0"
     "@google-cloud/storage" "^5.3.0"
 
 firebase-functions-test@^0.2.0:
@@ -1134,7 +1134,7 @@ google-auth-library@^6.0.0, google-auth-library@^6.1.1, google-auth-library@^6.1
     jws "^4.0.0"
     lru-cache "^6.0.0"
 
-google-gax@^2.2.0:
+google-gax@^2.9.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-2.9.2.tgz#780b2c0fc031c864007e1e198a9b90c7e946cca0"
   integrity sha512-Pve4osEzNKpBZqFXMfGKBbKCtgnHpUe5IQMh5Ou+Xtg8nLcba94L3gF0xgM5phMdGRRqJn0SMjcuEVmOYu7EBg==
