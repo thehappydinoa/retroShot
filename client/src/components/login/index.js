@@ -20,22 +20,36 @@ const Login = ({ firebase }) => {
     // TODO: Catch already in use
   };
 
+  const signup = () => {
+    firebase
+      .createUserWithEmailAndPassword(
+        userRef.current.value,
+        passRef.current.value
+      )
+      .then((user) => {
+        console.log(user);
+        history.push(ROUTES.LANDING);
+      });
+    // TODO: Catch already in use
+  };
+
   return (
-    <div>
+    <>
       <h1>Login</h1>
       <form>
         <label>
           Username:
           <input type="text" ref={userRef} />
         </label>
-
+        <br />
         <label>
           Password:
           <input type="text" ref={passRef} />
         </label>
       </form>
       <button onClick={login}>Login</button>
-    </div>
+      <button onClick={signup}>Sign Up</button>
+    </>
   );
 };
 
