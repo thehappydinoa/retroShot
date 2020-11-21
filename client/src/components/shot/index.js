@@ -19,11 +19,9 @@ class FetchRandomShot extends React.Component {
   }
 
   async componentDidMount() {
-    const url = "https://us-central1-***REMOVED***.cloudfunctions.net/api/shot/random"
+    const url = "https://us-central1-***REMOVED***.cloudfunctions.net/api/shot/random";
     const response = await fetch(url);
     const data = await response.json();
-    console.log("DATA")
-    console.log(data)
     this.setState({
       isLoading: false,
       shot: data,
@@ -37,9 +35,12 @@ class FetchRandomShot extends React.Component {
     return ( 
       <div className='shot-container'>
         {isLoading || !shot ? (
-          <div>loading...</div>
+          <div>Loading retroShot...</div>
         ) : (
-          <img className='shot-img' src={shot.data.imgUrl} alt="Retro shot"/> 
+        <div>
+          <img className='shot-img' src={shot.data.imgUrl} alt="Retro shot"/>
+          <p>Photo submitted by u/{shot.data.user}</p>
+        </div>
         )}
       </div>
     )
