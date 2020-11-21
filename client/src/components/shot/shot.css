@@ -1,0 +1,14 @@
+.shot-container {
+    background-color: #F9E6D4;
+    height: 450px;
+}
+
+.shot-img {
+    display: block;
+    position: relative;
+    left: 50%;
+    height: 400px;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
