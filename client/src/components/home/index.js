@@ -9,7 +9,7 @@ import { withFirebase } from "../firebase";
 import "./home.css";
 
 const Home = ({ firebase }) => (
-  <div className='home-container'>
+  <div className="home-container">
     <h1>Home</h1>
     <Title></Title>
     <Shot></Shot>
