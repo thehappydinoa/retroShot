@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Nav from "../nav";
+import Footer from "../footer";
 import Home from "../home";
 import Login from "../login";
 
@@ -17,6 +18,7 @@ const App = () => (
     <Route path={ROUTES.LOGIN}>
       <Login />
     </Route>
+    <Footer/>
   </Router>
 );
 

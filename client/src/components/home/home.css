@@ -1,3 +1,12 @@
 .home-container {
-  background-color: #f3cda9;
+  /* background-color: #f3cda9; */
+  height: 100vh;
+}
+
+.shot-container {
+  background-color: #f9e6d4;
+}
+
+.shot-img {
+  height: 400px;
 }
