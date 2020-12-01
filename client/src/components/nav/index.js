@@ -1,8 +1,7 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-
-import { withFirebase } from "../firebase";
+import { Nav, Navbar } from "react-bootstrap";
 import * as ROUTES from "../../routes";
+import { withFirebase } from "../firebase";
 
 const NavBar = ({ firebase }) => {
   return (
@@ -10,7 +9,12 @@ const NavBar = ({ firebase }) => {
       <Navbar.Brand href={ROUTES.LANDING}>retroShot</Navbar.Brand>
       <Nav>
         <Nav.Link href={ROUTES.LANDING}>Home</Nav.Link>
-        <Nav.Link href={ROUTES.LOGIN}>Login</Nav.Link>
+        <Nav.Link href={ROUTES.LANDING}>New Game</Nav.Link>
+        {firebase.auth.currentUser ? (
+          <Nav.Link disabled>{firebase.auth.currentUser.email}</Nav.Link>
+        ) : (
+          <Nav.Link href={ROUTES.LOGIN}>Login</Nav.Link>
+        )}
       </Nav>
     </Navbar>
   );
