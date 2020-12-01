@@ -11,14 +11,20 @@ const Login = ({ firebase }) => {
   const userRef = useRef(null);
   const passRef = useRef(null);
 
+  const redirect = (user) => {
+    console.log(user);
+    history.push(ROUTES.LANDING);
+  };
+
   const login = () => {
     firebase
       .signInWithEmailAndPassword(userRef.current.value, passRef.current.value)
-      .then((user) => {
-        console.log(user);
-        history.push(ROUTES.LANDING);
-      });
+      .then(redirect);
     // TODO: Catch already in use
+  };
+
+  const loginWithGoogle = () => {
+    firebase.signInWithGoogle().then(redirect);
   };
 
   const signup = () => {
@@ -27,10 +33,7 @@ const Login = ({ firebase }) => {
         userRef.current.value,
         passRef.current.value
       )
-      .then((user) => {
-        console.log(user);
-        history.push(ROUTES.LANDING);
-      });
+      .then(redirect);
     // TODO: Catch already in use
   };
 
@@ -78,6 +81,7 @@ const Login = ({ firebase }) => {
               </Button>
             </Form.Group>
           </Form>
+          <Button onClick={loginWithGoogle}>Login with Google</Button>
         </Col>
       </Row>
     </Container>

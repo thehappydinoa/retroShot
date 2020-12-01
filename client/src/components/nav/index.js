@@ -19,7 +19,9 @@ const NavBar = ({ firebase }) => {
       <Nav>
         <Nav.Link href={ROUTES.LANDING}>New Game</Nav.Link>
         {firebase.auth.currentUser ? (
-          <Nav.Link disabled>{firebase.auth.currentUser.email}</Nav.Link>
+          <Nav.Link variant="disabled" onClick={firebase.signOut}>
+            {firebase.auth.currentUser.email}
+          </Nav.Link>
         ) : (
           <Nav.Link href={ROUTES.LOGIN}>Login</Nav.Link>
         )}
