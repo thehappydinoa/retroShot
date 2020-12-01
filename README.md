@@ -1,4 +1,4 @@
-# retroShot [![Node 10](https://img.shields.io/badge/node-v10.0-orange)](https://nodejs.org/en/download/releases/) [![API Docs](https://img.shields.io/badge/api%20docs-passing-green)](https://documenter.getpostman.com/view/4309917/TVenfoyk)
+# retroShot [![Node 12](https://img.shields.io/badge/node-v12.0-orange)](https://nodejs.org/en/download/releases/) [![API Docs](https://img.shields.io/badge/api%20docs-passing-green)](https://documenter.getpostman.com/view/4309917/TVenfoyk)
 
 Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`](https://www.reddit.com/r/OldSchoolCool/) where images are gathered and the user is asked to guess the year.
 
