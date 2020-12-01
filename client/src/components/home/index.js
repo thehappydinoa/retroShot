@@ -86,7 +86,7 @@ const Home = () => {
                 />
                 <p>
                   Photo submitted by{" "}
-                  <a href={`https://www.reddit.com/u/${shot.user}`}>
+                  <a href={shot.postUrl} target="_blank" rel="noreferrer">
                     u/{shot.user}
                   </a>
                 </p>

@@ -11,7 +11,7 @@
     "functions"
   ],
   "scripts": {
-    "client": "yarn workspace client watch",
+    "client": "yarn workspace client start",
     "start": "yarn run client",
     "functions": "yarn workspace functions serve",
     "scrape": "yarn workspace functions scrape"
