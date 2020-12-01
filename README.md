@@ -15,7 +15,7 @@ Final project for CS 375. Based around the popular subreddit [`r/OldSchoolCool`]
 This project uses `Yarn` Workspaces.
 
 ```sh
-yarn install
+yarn
 ```
 
 ## Usage
@@ -30,18 +30,4 @@ yarn serve
 
 ```sh
 yarn scrape
-```
-
-## Docs
-
-```js
-let shot = {
-  postId: 123,
-  title: "Test Title",
-  user: "user123",
-  url: "https://...",
-  year: 2019,
-  // If year is none decade will be used, if neither an error will be thrown
-  decade: "2010s",
-};
 ```
