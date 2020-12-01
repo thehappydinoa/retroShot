@@ -1,13 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 import { withFirebase } from "../firebase";
 import * as ROUTES from "../../routes";
 
 const Login = ({ firebase }) => {
   let history = useHistory();
-
+  const [message, setMessage] = useState(null);
   const userRef = useRef(null);
   const passRef = useRef(null);
 
@@ -19,12 +19,15 @@ const Login = ({ firebase }) => {
   const login = () => {
     firebase
       .signInWithEmailAndPassword(userRef.current.value, passRef.current.value)
-      .then(redirect);
-    // TODO: Catch already in use
+      .then(redirect)
+      .catch((error) => setMessage(error.message));
   };
 
   const loginWithGoogle = () => {
-    firebase.signInWithGoogle().then(redirect);
+    firebase
+      .signInWithGoogle()
+      .then(redirect)
+      .catch((error) => setMessage(error.message));
   };
 
   const signup = () => {
@@ -33,8 +36,8 @@ const Login = ({ firebase }) => {
         userRef.current.value,
         passRef.current.value
       )
-      .then(redirect);
-    // TODO: Catch already in use
+      .then(redirect)
+      .catch((error) => setMessage(error.message));
   };
 
   const handleSubmit = (event) => {
@@ -82,6 +85,11 @@ const Login = ({ firebase }) => {
             </Form.Group>
           </Form>
           <Button onClick={loginWithGoogle}>Login with Google</Button>
+          {message && (
+            <Alert variant={message === "Correct!" ? "success" : "warning"}>
+              {message}
+            </Alert>
+          )}
         </Col>
       </Row>
     </Container>
