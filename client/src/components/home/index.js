@@ -69,7 +69,16 @@ const Home = () => {
         <Row className="justify-content-md-center">
           <Col xs="auto">
             <h1>Can you guess what year this picture was taken?</h1>
-            <p>With pictures taken from r/OldSchoolCool</p>
+            <p>
+              With pictures taken from{" "}
+              <a
+                href="https://www.reddit.com/r/OldSchoolCool/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                r/OldSchoolCool
+              </a>
+            </p>
           </Col>
         </Row>
 
