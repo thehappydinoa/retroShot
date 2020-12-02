@@ -1,6 +1,7 @@
 .home-container {
   /* background-color: #f3cda9; */
   height: 100vh;
+  padding: 30px 0;
 }
 
 .shot-container {
@@ -9,4 +10,8 @@
 
 .shot-img {
   height: 400px;
+}
+.tr{
+  text-align: right;
+  line-height: 40px;
 }
