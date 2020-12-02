@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 import { withFirebase } from "../firebase";
 import * as ROUTES from "../../routes";
-
+import './login.css'
 const Login = ({ firebase }) => {
   let history = useHistory();
   const [message, setMessage] = useState(null);
@@ -48,7 +48,7 @@ const Login = ({ firebase }) => {
   };
 
   return (
-    <Container>
+    <Container className='loginbox'>
       <Row className="justify-content-md-center" style={{ paddingTop: "2rem" }}>
         <Col>
           <Form onSubmit={handleSubmit}>
@@ -74,7 +74,17 @@ const Login = ({ firebase }) => {
                 ref={passRef}
               />
             </Form.Group>
-            <Form.Group>
+                      <Form.Row className="justify-content-md-center centerbtn">
+              <Col xs={6} md={6}  className='tr'>
+                <Button variant="secondary" className="leftbtn" type="submit">
+                Login
+              </Button>
+              </Col>
+              <Col xs={6} md={6} ><Button variant="primary" className="rightbtn" onClick={signup}>
+                Sign Up
+              </Button></Col>
+          </Form.Row>
+            {/* <Form.Group>
               <Button variant="secondary" type="submit">
                 Login
               </Button>
@@ -82,9 +92,9 @@ const Login = ({ firebase }) => {
               <Button variant="primary" onClick={signup}>
                 Sign Up
               </Button>
-            </Form.Group>
+            </Form.Group> */}
           </Form>
-          <Button onClick={loginWithGoogle}>Login with Google</Button>
+          <Button className='loginbtn' onClick={loginWithGoogle}>Login with Google</Button>
           {message && (
             <Alert variant={message === "Correct!" ? "success" : "warning"}>
               {message}

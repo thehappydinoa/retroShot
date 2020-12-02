@@ -107,10 +107,14 @@ const Home = () => {
         </Row>
         <Form onSubmit={handleSubmit} ref={formRef}>
           <Form.Row className="justify-content-md-center">
-            <Col xs="auto">
-              <Form.Label>Year</Form.Label>
-              <Form.Control placeholder="1900" />
-            </Col>
+            {/* <Col xs="auto"> */}
+              <Col xs={4} md={4}  className='tr'>
+              Year
+              </Col>
+              <Col xs={8} md={8} ><Form.Control placeholder="1900" /></Col>
+              {/* <Form.Label></Form.Label> */}
+              
+            {/* </Col> */}
           </Form.Row>
           <br />
           <Form.Row className="justify-content-md-center">
