@@ -1,4 +1,5 @@
 let axios = require("axios");
+const { warn } = require("firebase-functions/lib/logger");
 
 async function fetchShots(postsPerRequest = 100) {
   let shots = [];
@@ -52,7 +53,10 @@ async function fetchShots(postsPerRequest = 100) {
       });
       return shots;
     })
-    .catch(console.warn);
+    .catch((err) => {
+      warn(err);
+      console.warn(err);
+    });
 }
 
 function main() {
@@ -72,10 +76,16 @@ function main() {
         axios
           .post(`${BASE_URL}/shot`, shot)
           .then(console.log)
-          .catch(console.warn)
+          .catch((err) => {
+            warn(err);
+            console.warn(err);
+          })
       )
     )
-    .catch(console.warn);
+    .catch((err) => {
+      warn(err);
+      console.warn(err);
+    });
 }
 
 if (require.main === module) {
