@@ -40,6 +40,6 @@
     ]
   },
   "devDependencies": {
-    "firebase-tools": "^8.16.2"
+    "firebase-tools": "^8.17.0"
   }
 }
