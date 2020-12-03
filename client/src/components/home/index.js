@@ -56,7 +56,14 @@ const Home = () => {
       setMessage("Correct!");
       setTimeout(nextShot, 2000);
     } else {
-      setMessage("Incorrect!");
+      setMessage(
+        `Incorrect! ${
+          shot.year
+            ? `The year is ${shot.year}`
+            : `This was in the ${shot.decade}'s`
+        }`
+      );
+      setTimeout(nextShot, 2000);
     }
     event.preventDefault();
     event.stopPropagation();
