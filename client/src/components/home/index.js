@@ -90,7 +90,7 @@ const Home = () => {
                   className="shot-img"
                   src={shot.imgUrl}
                   alt="Retro shot"
-                  onError={() => nextShot()}
+                  onError={nextShot}
                   rounded
                 />
                 <p>
