@@ -18,6 +18,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [shot, setShot] = useState(null);
   const [message, setMessage] = useState(null);
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     if (!shot) {
@@ -54,6 +55,7 @@ const Home = () => {
     const guess = parseInt(form[0].value);
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
+      addPoint(1);
       setTimeout(nextShot, 2000);
     } else {
       setMessage(
@@ -70,82 +72,103 @@ const Home = () => {
     setLoading(false);
   };
 
+  const addPoint = (newPoints = 1) => setPoints(points + newPoints);
+
+  const Title = () => (
+    <Row className="justify-content-md-center">
+      <Col xs="auto">
+        <h1>Can you guess what year this picture was taken?</h1>
+        <p>
+          With pictures taken from{" "}
+          <a
+            href="https://www.reddit.com/r/OldSchoolCool/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            r/OldSchoolCool
+          </a>
+        </p>
+      </Col>
+    </Row>
+  );
+
+  const Score = () => (
+    <Row className="justify-content-md-center">
+      <Col xs="auto">
+        <h3>Score: {points}</h3>
+      </Col>
+    </Row>
+  );
+
+  const Shot = () => (
+    <Row className="justify-content-md-center">
+      <Col xs="auto">
+        {shot ? (
+          <>
+            <Image
+              className="shot-img"
+              src={shot.imgUrl}
+              alt="Retro shot"
+              onError={nextShot}
+              rounded
+            />
+            <p>
+              Photo submitted by{" "}
+              <a href={shot.postUrl} target="_blank" rel="noreferrer">
+                u/{shot.user}
+              </a>
+            </p>
+          </>
+        ) : (
+          <>Loading shot...</>
+        )}
+      </Col>
+    </Row>
+  );
+
+  const Guess = () => (
+    <Form onSubmit={handleSubmit} ref={formRef}>
+      <Form.Row className="justify-content-md-center">
+        {/* <Col xs="auto"> */}
+        <Col xs="auto" className="tr">
+          Year
+        </Col>
+        <Col xs="auto">
+          <Form.Control placeholder="1900" style={{ width: 100 }} />
+        </Col>
+        {/* <Form.Label></Form.Label> */}
+
+        {/* </Col> */}
+      </Form.Row>
+      <br />
+      <Form.Row className="justify-content-md-center">
+        <Col xs="auto">
+          <Button variant="warning" disabled={loading} onClick={nextShot}>
+            Skip
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button type="submit" disabled={loading}>
+            Check
+          </Button>
+        </Col>
+      </Form.Row>
+    </Form>
+  );
+
   return (
     <div className="home-container">
       <Container>
-        <Row className="justify-content-md-center">
-          <Col xs="auto">
-            <h1>Can you guess what year this picture was taken?</h1>
-            <p>
-              With pictures taken from{" "}
-              <a
-                href="https://www.reddit.com/r/OldSchoolCool/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                r/OldSchoolCool
-              </a>
-            </p>
-          </Col>
-        </Row>
-
-        <Row className="justify-content-md-center">
-          <Col xs="auto">
-            {shot ? (
-              <>
-                <Image
-                  className="shot-img"
-                  src={shot.imgUrl}
-                  alt="Retro shot"
-                  onError={nextShot}
-                  rounded
-                />
-                <p>
-                  Photo submitted by{" "}
-                  <a href={shot.postUrl} target="_blank" rel="noreferrer">
-                    u/{shot.user}
-                  </a>
-                </p>
-              </>
-            ) : (
-              <>Loading shot...</>
-            )}
-          </Col>
-        </Row>
-        <Form onSubmit={handleSubmit} ref={formRef}>
-          <Form.Row className="justify-content-md-center">
-            {/* <Col xs="auto"> */}
-            <Col xs="auto" className="tr">
-              Year
-            </Col>
-            <Col xs="auto">
-              <Form.Control placeholder="1900" style={{ width: 100 }} />
-            </Col>
-            {/* <Form.Label></Form.Label> */}
-
-            {/* </Col> */}
-          </Form.Row>
-          <br />
-          <Form.Row className="justify-content-md-center">
-            <Col xs="auto">
-              <Button variant="warning" disabled={loading} onClick={nextShot}>
-                Skip
-              </Button>
-            </Col>
-            <Col xs="auto">
-              <Button type="submit" disabled={loading}>
-                Check
-              </Button>
-            </Col>
-          </Form.Row>
-        </Form>
+        <Title />
+        <Score />
+        <Shot />
+        <Guess />
         <br />
         {message && (
           <Alert variant={message === "Correct!" ? "success" : "warning"}>
             {message}
           </Alert>
         )}
-        {/* TODO: Score and answer */}
       </Container>
     </div>
   );
