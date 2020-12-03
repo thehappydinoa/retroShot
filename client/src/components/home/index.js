@@ -74,6 +74,8 @@ const Home = () => {
 
   const addPoint = (newPoints = 1) => setPoints(points + newPoints);
 
+  const round = (n, to) => n - (n % to);
+
   const Title = () => (
     <Row className="justify-content-md-center">
       <Col xs="auto">
@@ -134,7 +136,12 @@ const Home = () => {
           Year
         </Col>
         <Col xs="auto">
-          <Form.Control placeholder="1900" style={{ width: 100 }} />
+          <Form.Control
+            placeholder={
+              (shot && `${round(shot.year || shot.decade, 100)}`) || "1900"
+            }
+            style={{ width: 100 }}
+          />
         </Col>
         {/* <Form.Label></Form.Label> */}
 
