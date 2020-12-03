@@ -2,17 +2,21 @@
   max-width: 400px;
   margin: auto;
 }
+
 .centerbtn {
   overflow: hidden;
 }
+
 .leftbtn {
   float: left;
   width: 90%;
 }
+
 .rightbtn {
   float: right;
   width: 90%;
 }
+
 .loginbtn {
   display: block;
   margin: 20px auto;
