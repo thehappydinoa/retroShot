@@ -2047,10 +2047,10 @@
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
 
-"@testing-library/user-event@^12.3.0":
-  version "12.3.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.3.0.tgz#bd4edf544b70721e1996f3be36830e942c777b2b"
-  integrity sha512-A4TZofjkOH42ydTtHZcGNhwYjonkVIGBi4pmNweUgjDEGmWHuZf4k7hLd6QTL+rkSOgrd3TOCFDNyK9KO0reeA==
+"@testing-library/user-event@^12.4.0":
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.4.0.tgz#30a795e626744c17c6b1f957a228d55e1c6965a8"
+  integrity sha512-qYXcZ1uQVd6JT6TLdB1hS8WxMYVpLTkJaTZdrjI5If0J3Piv07MVlpXKgrKEubuGmlTHTK7zQ+NuSPe0g4q3ww==
   dependencies:
     "@babel/runtime" "^7.10.2"
 
@@ -6294,10 +6294,10 @@ firebase-functions@^3.12.0:
     express "^4.17.1"
     lodash "^4.17.14"
 
-firebase-tools@^8.16.2:
-  version "8.16.2"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-8.16.2.tgz#fdcae8fe12411aaac90fb5d1602d34bd721fcd3f"
-  integrity sha512-3deje+CJ5XtYDsb92YqKdNZaV6+OBJqGA2zatozSaBaKpVkIqTyt9vpglKaar/9N+UIqsIfpjruLS6dCkVk/Gg==
+firebase-tools@^8.17.0:
+  version "8.17.0"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-8.17.0.tgz#8bad0e164e2b48ba384e2659c48366fc4d4643bc"
+  integrity sha512-elnmwj+/+psPpHULsiD6Vaezv9R7JYlC/weAmCTOWNky3+ZY0UqG/grquF+nFdwCtqknWESCMvzWRPxcc8Tl+w==
   dependencies:
     "@google-cloud/pubsub" "^1.7.0"
     JSONStream "^1.2.1"
