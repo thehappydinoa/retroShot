@@ -18,27 +18,42 @@ const Login = ({ firebase }) => {
   };
 
   const login = () => {
-    firebase
-      .signInWithEmailAndPassword(userRef.current.value, passRef.current.value)
-      .then(redirect)
-      .catch((error) => setMessage(error.message));
+    firebase.auth
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() =>
+        firebase
+          .signInWithEmailAndPassword(
+            userRef.current.value,
+            passRef.current.value
+          )
+          .then(redirect)
+          .catch((error) => setMessage(error.message))
+      );
   };
 
   const loginWithGoogle = () => {
-    firebase
-      .signInWithGoogle()
-      .then(redirect)
-      .catch((error) => setMessage(error.message));
+    firebase.auth
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() =>
+        firebase
+          .signInWithGoogle()
+          .then(redirect)
+          .catch((error) => setMessage(error.message))
+      );
   };
 
   const signup = () => {
-    firebase
-      .createUserWithEmailAndPassword(
-        userRef.current.value,
-        passRef.current.value
-      )
-      .then(redirect)
-      .catch((error) => setMessage(error.message));
+    firebase.auth
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() =>
+        firebase
+          .createUserWithEmailAndPassword(
+            userRef.current.value,
+            passRef.current.value
+          )
+          .then(redirect)
+          .catch((error) => setMessage(error.message))
+      );
   };
 
   const handleSubmit = (event) => {
