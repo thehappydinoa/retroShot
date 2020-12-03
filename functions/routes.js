@@ -19,7 +19,7 @@ router.post("/shot", shotValidator, ShotsCtrl.createShot);
 // TODO: Add guess endpoint
 // router.post("/shot/:id/guess", shotValidator, ShotsCtrl.createShot);
 router.put("/shot/:id", shotUpdaterValidator, ShotsCtrl.updateShot);
-router.delete("/shot/:id", ShotsCtrl.deleteShot);
+// router.delete("/shot/:id", ShotsCtrl.deleteShot);
 router.get("/shot/random", getShotValidator, ShotsCtrl.getRandomShot);
 router.get("/shot/:id", getShotValidator, ShotsCtrl.getShotById);
 

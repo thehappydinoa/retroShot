@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 const { validationResult } = require("express-validator");
 // const { fetchShots } = require("../scraper");
+const { warn } = require("firebase-functions/lib/logger");
 
 const firestore = admin.firestore();
 
@@ -23,6 +24,7 @@ createShot = async (req, res) => {
       });
     })
     .catch((error) => {
+      warn("Shot not created", { shot: "new" });
       return res.status(400).json({
         success: false,
         error,
@@ -51,6 +53,7 @@ updateShot = async (req, res) => {
       });
     })
     .catch((error) => {
+      warn("Shot not updated", { shot: "random" });
       return res.status(404).json({
         success: false,
         error,
@@ -73,6 +76,7 @@ deleteShot = async (req, res) => {
       });
     })
     .catch((error) => {
+      warn("Shot not delted", { shot: shotId });
       return res.status(404).json({
         success: false,
         error,
@@ -93,6 +97,7 @@ getShotById = async (req, res) => {
         .json({ success: true, id: shotId, data: documentSnapshot.data() });
     })
     .catch((error) => {
+      warn("Shot not found", { shot: shotId });
       return res.status(404).json({
         success: false,
         error,
@@ -115,6 +120,7 @@ getShots = async (req, res) => {
   let querySnapshot = await queryRef.get();
 
   if (!querySnapshot.size) {
+    warn("Shot not found", { shot: "all" });
     return res.status(404).json({ success: false, error: "Shot not found" });
   }
 
@@ -142,6 +148,7 @@ getRandomShot = async (req, res) => {
   let querySnapshot = await queryRef.get();
 
   if (!querySnapshot.size) {
+    warn("Shot not found", { shot: "random" });
     return res.status(404).json({ success: false, error: `Shot not found` });
   }
 
@@ -161,6 +168,7 @@ getRandomShot = async (req, res) => {
         .json({ success: true, id: shotId, data: documentSnapshot.data() });
     })
     .catch((error) => {
+      warn("Shot not found", { shot: shotId });
       return res.status(404).json({
         error,
         message: "Shot not found!",
