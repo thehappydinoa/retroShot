@@ -8,7 +8,7 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
-
+// import ls from "local-storage";
 import { getRandomShot } from "../../utils";
 
 import "./home.css";
@@ -19,7 +19,7 @@ const Home = () => {
   const [shot, setShot] = useState(null);
   const [message, setMessage] = useState(null);
   const [points, setPoints] = useState(0);
-  let prevYearDiff = null;
+  let prevYearDiff = 0;
 
   useEffect(() => {
     if (!shot) {
@@ -49,33 +49,33 @@ const Home = () => {
     }
     return false;
   };
-  
+
   const checkWarmerColder = (yearDiff) => {
     if (prevYearDiff < yearDiff) {
-      return ("Warmer!");
+      return "Warmer!";
+    } else {
+      return "Colder!";
     }
-    else {
-      return ("Colder!");
-    }
-  }
+  };
 
   const handleSubmit = (event) => {
     setLoading(true);
     const form = event.currentTarget;
     const guess = parseInt(form[0].value);
-    let hint = ""
+    let hint = "";
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
       addPoint(1);
       setTimeout(nextShot, 2000);
     } else {
       if (prevYearDiff) {
-        console.log("IN IF")
+        console.log("IN IF");
         hint = checkWarmerColder(guess);
-        console.log("Hint!: " + hint)
+        console.log("Hint!: " + hint);
       }
-      prevYearDiff = Math.abs(guess-shot.year);
-      console.log("Prev Year Diff: " + prevYearDiff)
+      prevYearDiff = Math.abs(guess - shot.year);
+      // ls.set("prevYearDiff", prevYearDiff);
+      console.log("Prev Year Diff: " + prevYearDiff);
       const message = `Incorrect! ${hint}`;
       setMessage(message);
     }
