@@ -19,6 +19,7 @@ const Home = () => {
   const [shot, setShot] = useState(null);
   const [message, setMessage] = useState(null);
   const [points, setPoints] = useState(0);
+  let prevYearDiff = null;
 
   useEffect(() => {
     if (!shot) {
@@ -48,24 +49,35 @@ const Home = () => {
     }
     return false;
   };
+  
+  const checkWarmerColder = (yearDiff) => {
+    if (prevYearDiff < yearDiff) {
+      return ("Warmer!");
+    }
+    else {
+      return ("Colder!");
+    }
+  }
 
   const handleSubmit = (event) => {
     setLoading(true);
     const form = event.currentTarget;
     const guess = parseInt(form[0].value);
+    let hint = ""
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
       addPoint(1);
       setTimeout(nextShot, 2000);
     } else {
-      setMessage(
-        `Incorrect! ${
-          shot.year
-            ? `The year is ${shot.year}`
-            : `This was in the ${shot.decade}'s`
-        }`
-      );
-      setTimeout(nextShot, 2000);
+      if (prevYearDiff) {
+        console.log("IN IF")
+        hint = checkWarmerColder(guess);
+        console.log("Hint!: " + hint)
+      }
+      prevYearDiff = Math.abs(guess-shot.year);
+      console.log("Prev Year Diff: " + prevYearDiff)
+      const message = `Incorrect! ${hint}`;
+      setMessage(message);
     }
     event.preventDefault();
     event.stopPropagation();
