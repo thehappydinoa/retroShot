@@ -1,5 +1,6 @@
-.footer,.fixed-bottom{
-    text-align: center;
-    width: 100%;
-    display: block;
+.footer,
+.fixed-bottom {
+  text-align: center;
+  width: 100%;
+  display: block;
 }
