@@ -19,8 +19,8 @@ const Home = () => {
   const [shot, setShot] = useState(null);
   const [message, setMessage] = useState(null);
   const [points, setPoints] = useState(0);
-  // let prevYearDiff = 0;
   const [prevYearDiff, setPrevYearDiff] = useState(0);
+  const [guessCount, setGuessCount] = useState(0);
 
   useEffect(() => {
     if (!shot) {
@@ -30,8 +30,9 @@ const Home = () => {
         .then((results) => {
           setShot(results.data);
           setLoading(false);
+
           const { year, decade } = results.data;
-          console.log(`${year} or ${decade}`);
+          console.log(`Year: ${year} or Decade: ${decade}`);
         });
     }
   }, [shot, setShot, setLoading]);
@@ -40,19 +41,22 @@ const Home = () => {
     formRef.current.reset();
     setShot(null);
     setMessage(null);
+    setGuessCount(0);
   };
 
   const checkYear = (year) => {
     if (shot.year) {
       return shot.year === year;
     } else if (shot.decade) {
-      return shot.decade <= year <= shot.decade + 10;
+      // console.log(`Input: ${year}`)
+      // console.log(`Decade: ${shot.decade}`)
+      return (shot.decade <= year && year < shot.decade + 10);
     }
     return false;
   };
 
   const checkWarmerColder = (yearDiff) => {
-    if (prevYearDiff > yearDiff) {
+    if (prevYearDiff >= yearDiff) {
       return "Warmer!";
     } else {
       return "Colder!";
@@ -64,19 +68,21 @@ const Home = () => {
     const form = event.currentTarget;
     const guess = parseInt(form[0].value);
     let hint = "";
+    setGuessCount(guessCount+1);
+    console.log(guessCount)
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
-      addPoint(1);
+      addPoint(calcScore(guessCount));
       setTimeout(nextShot, 2000);
     } else {
       let currentYearDiff = Math.abs(guess - shot.year);
       if (prevYearDiff) {
-        console.log("IN IF");
+        // console.log("IN IF");
         hint = checkWarmerColder(currentYearDiff);
-        console.log("Hint!: " + hint);
+        // console.log("Hint!: " + hint);
       }
       setPrevYearDiff(currentYearDiff);
-      console.log("Prev Year Diff: " + prevYearDiff);
+      // console.log("Prev Year Diff: " + prevYearDiff);
       const message = `Incorrect! ${hint}`;
       setMessage(message);
     }
@@ -88,6 +94,11 @@ const Home = () => {
   const addPoint = (newPoints = 1) => setPoints(points + newPoints);
 
   const round = (n, to) => n - (n % to);
+  
+  //Maximum & minumum points alotted for a correct answer
+  const maxPoints = 10;
+  const minPoints = 1;
+  const calcScore = (guessCnt) => Math.max(maxPoints-guessCnt, minPoints);
 
   const Title = () => (
     <Row className="justify-content-md-center">
