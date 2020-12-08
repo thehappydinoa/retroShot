@@ -19,7 +19,8 @@ const Home = () => {
   const [shot, setShot] = useState(null);
   const [message, setMessage] = useState(null);
   const [points, setPoints] = useState(0);
-  let prevYearDiff = 0;
+  // let prevYearDiff = 0;
+  const [prevYearDiff, setPrevYearDiff] = useState(0);
 
   useEffect(() => {
     if (!shot) {
@@ -51,7 +52,7 @@ const Home = () => {
   };
 
   const checkWarmerColder = (yearDiff) => {
-    if (prevYearDiff < yearDiff) {
+    if (prevYearDiff > yearDiff) {
       return "Warmer!";
     } else {
       return "Colder!";
@@ -68,13 +69,13 @@ const Home = () => {
       addPoint(1);
       setTimeout(nextShot, 2000);
     } else {
+      let currentYearDiff = Math.abs(guess - shot.year);
       if (prevYearDiff) {
         console.log("IN IF");
-        hint = checkWarmerColder(guess);
+        hint = checkWarmerColder(currentYearDiff);
         console.log("Hint!: " + hint);
       }
-      prevYearDiff = Math.abs(guess - shot.year);
-      // ls.set("prevYearDiff", prevYearDiff);
+      setPrevYearDiff(currentYearDiff);
       console.log("Prev Year Diff: " + prevYearDiff);
       const message = `Incorrect! ${hint}`;
       setMessage(message);
