@@ -50,7 +50,7 @@ const Home = () => {
     } else if (shot.decade) {
       // console.log(`Input: ${year}`)
       // console.log(`Decade: ${shot.decade}`)
-      return (shot.decade <= year && year < shot.decade + 10);
+      return shot.decade <= year && year < shot.decade + 10;
     }
     return false;
   };
@@ -68,8 +68,8 @@ const Home = () => {
     const form = event.currentTarget;
     const guess = parseInt(form[0].value);
     let hint = "";
-    setGuessCount(guessCount+1);
-    console.log(guessCount)
+    setGuessCount(guessCount + 1);
+    console.log(guessCount);
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
       addPoint(calcScore(guessCount));
@@ -94,11 +94,11 @@ const Home = () => {
   const addPoint = (newPoints = 1) => setPoints(points + newPoints);
 
   const round = (n, to) => n - (n % to);
-  
+
   //Maximum & minumum points alotted for a correct answer
   const maxPoints = 10;
   const minPoints = 1;
-  const calcScore = (guessCnt) => Math.max(maxPoints-guessCnt, minPoints);
+  const calcScore = (guessCnt) => Math.max(maxPoints - guessCnt, minPoints);
 
   const Title = () => (
     <Row className="justify-content-md-center">
