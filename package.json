@@ -4,7 +4,7 @@
   "description": "Final project for CS 375",
   "author": "retroShot Team",
   "private": true,
-  "repository": "git@github.com:thehappydinoa/retroShot.git",
+  "repository": "https://github.com/thehappydinoa/retroShot",
   "license": "MIT",
   "workspaces": [
     "client",
