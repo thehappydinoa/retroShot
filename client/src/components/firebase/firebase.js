@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import app from "firebase/app";
 import "firebase/auth";
 
@@ -20,7 +19,7 @@ class Firebase {
 
     // Initialize Firebase Auth
     this.auth = app.auth();
-    this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    this.auth.setPersistence(app.auth.Auth.Persistence.SESSION);
 
     this.googleProvider = new app.auth.GoogleAuthProvider();
   }
