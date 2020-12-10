@@ -4,6 +4,7 @@ const { validationResult } = require("express-validator");
 const { warn } = require("firebase-functions/lib/logger");
 
 const firestore = admin.firestore();
+const shotCollection = firestore.collection("shots");
 
 createShot = async (req, res) => {
   const errors = validationResult(req);
@@ -76,7 +77,7 @@ deleteShot = async (req, res) => {
       });
     })
     .catch((error) => {
-      warn("Shot not delted", { shot: shotId });
+      warn("Shot not deleted", { shot: shotId });
       return res.status(404).json({
         success: false,
         error,
@@ -136,12 +137,13 @@ getShots = async (req, res) => {
 
 getRandomShot = async (req, res) => {
   const shotType = req.query.type;
+  const decadeOnly = req.query.decadeOnly;
 
   let collectionRef = firestore.collection("shots");
 
   let queryRef = collectionRef;
 
-  if (shotType) {
+  if (!decadeOnly && shotType) {
     queryRef = collectionRef.where(shotType, "!=", null);
   }
 
@@ -157,15 +159,18 @@ getRandomShot = async (req, res) => {
     shots.push(documentSnapshot.ref.id);
   });
 
-  var shotId = shots[Math.floor(Math.random() * shots.length)];
+  let shotId = shots[Math.floor(Math.random() * shots.length)];
 
   return collectionRef
     .doc(shotId)
     .get()
     .then((documentSnapshot) => {
-      return res
-        .status(200)
-        .json({ success: true, id: shotId, data: documentSnapshot.data() });
+      let data = documentSnapshot.data();
+      if (data.year) {
+        data.decade = parseInt(data.year / 10, 10) * 10;
+        data.year = null;
+      }
+      return res.status(200).json({ success: true, id: shotId, data });
     })
     .catch((error) => {
       warn("Shot not found", { shot: shotId });
