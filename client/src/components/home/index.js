@@ -6,7 +6,9 @@ import {
   Image,
   Form,
   Button,
+  ButtonGroup,
   Alert,
+  ToggleButton
 } from "react-bootstrap";
 // import ls from "local-storage";
 import { getRandomShot } from "../../utils";
@@ -188,6 +190,35 @@ const Home = () => {
     </Form>
   );
 
+
+  const [radioValue, setRadioValue] = useState('1');
+  const radios = [
+    { name: 'Guess year', value: '1' },
+    { name: 'Guess decade', value: '2' },
+  ];
+  const Toggle = () => (
+    <Row className="justify-content-md-center">
+      <Col xs="auto">
+        <br />  
+        <ButtonGroup toggle>
+          {radios.map((radio, idx) => (
+            <ToggleButton
+              key={idx}
+              type="radio"
+              variant="secondary"
+              name="radio"
+              value={radio.value}
+              checked={radioValue === radio.value}
+              onChange={(e) => setRadioValue(e.currentTarget.value)}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
+      </Col>
+    </Row>
+  );
+
   return (
     <div className="home-container">
       <Container>
@@ -195,6 +226,7 @@ const Home = () => {
         <Score />
         <Shot />
         <Guess />
+        <Toggle />
         <br />
         {message && (
           <Alert variant={message === "Correct!" ? "success" : "warning"}>
