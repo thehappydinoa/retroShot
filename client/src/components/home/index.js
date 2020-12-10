@@ -47,7 +47,8 @@ const Home = () => {
   const checkYear = (year) => {
     if (shot.year) {
       return shot.year === year;
-    } else if (shot.decade) {
+    }
+    if (shot.decade) {
       // console.log(`Input: ${year}`)
       // console.log(`Decade: ${shot.decade}`)
       return shot.decade <= year && year < shot.decade + 10;
@@ -157,7 +158,7 @@ const Home = () => {
       <Form.Row className="justify-content-md-center">
         {/* <Col xs="auto"> */}
         <Col xs="auto" className="tr">
-          Year
+          {shot && shot.decade ? "Decade" : "Year"}
         </Col>
         <Col xs="auto">
           <Form.Control
