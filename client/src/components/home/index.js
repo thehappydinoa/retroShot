@@ -58,10 +58,13 @@ const Home = () => {
                   : `Year: ${results.data.year}`
               );
             } else {
-              setMessage(results.error);
+              setMessage({ message: results.error, variant: "warning" });
             }
           } else {
-            setMessage("Could not load shot. Trying again in 3 seconds...");
+            setMessage({
+              message: "Could not load shot. Trying again in 3 seconds...",
+              variant: "warning",
+            });
             setLoading(false);
           }
 
@@ -95,16 +98,32 @@ const Home = () => {
     }
   };
 
+  const correctAlert = (points) => {
+    setMessage({
+      message: (
+        <>
+          <Alert.Heading>Correct! +{points} points</Alert.Heading>
+          <p>This is: "{shot.title}"</p>
+          <div className="d-flex justify-content-end">
+            <Button onClick={nextShot} variant="outline-success">
+              Next!
+            </Button>
+          </div>
+        </>
+      ),
+      variant: "success",
+    });
+  };
+
   const handleSubmit = (event) => {
-    setLoading(true);
     const form = event.currentTarget;
     const guess = parseInt(form[0].value);
     let hint = "";
     setGuessCount(guessCount + 1);
     if (guess && checkYear(guess)) {
-      setMessage("Correct!");
-      addPoint(calcScore(guessCount));
-      setTimeout(nextShot, 2000);
+      const points = calcScore(guessCount);
+      correctAlert(points);
+      addPoint(points);
     } else {
       let currentYearDiff = Math.abs(guess - shot.year);
       if (prevYearDiff) {
@@ -112,11 +131,10 @@ const Home = () => {
       }
       setPrevYearDiff(currentYearDiff);
       const message = `Incorrect! ${hint}`;
-      setMessage(message);
+      setMessage(message, "warning");
     }
     event.preventDefault();
     event.stopPropagation();
-    setLoading(false);
   };
 
   const addPoint = (newPoints = 1) => setPoints(points + newPoints);
@@ -251,8 +269,8 @@ const Home = () => {
         <Toggle />
         <br />
         {message && (
-          <Alert variant={message === "Correct!" ? "success" : "warning"}>
-            {message}
+          <Alert variant={message.variant || "success"}>
+            {message.message || message}
           </Alert>
         )}
       </Container>

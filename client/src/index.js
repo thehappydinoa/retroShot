@@ -1,7 +1,11 @@
+/* eslint-disable import/first */
+import dotenv from 'dotenv'
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+
+dotenv.config()
 
 import App from "./components/app";
 import { AuthProvider } from "./components/firebase";

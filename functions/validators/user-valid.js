@@ -20,6 +20,7 @@ const authOnly = async (req, res, next) => {
     });
   }
 
+  // FIXME: Debugging only
   if (idToken === "testing123") {
     req.uid = "testing123";
     return next();
