@@ -12,10 +12,7 @@ const Login = () => {
   const userRef = useRef(null);
   const passRef = useRef(null);
 
-  const redirect = (user) => {
-    // console.log(user);
-    history.push(ROUTES.LANDING);
-  };
+  const redirect = () => history.push(ROUTES.LANDING);
 
   const login = () => {
     firebase

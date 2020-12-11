@@ -36,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     if (user && points != null) {
       if (!user.score || points > user.score) {
-        setScore(points).then(console.log).catch(console.warn);
+        setScore(points).then(console.debug).catch(console.warn);
       } else {
         setPoints(user.score);
       }
@@ -118,9 +118,13 @@ const Home = () => {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     const guess = parseInt(form[0].value);
+    if (!guess) {
+      setMessage({ message: "Please enter a valid year", variant: "danger" });
+      return;
+    }
     let hint = "";
     setGuessCount(guessCount + 1);
-    if (guess && checkYear(guess)) {
+    if (checkYear(guess)) {
       const points = calcScore(guessCount);
       correctAlert(points);
       addPoint(points);
@@ -130,8 +134,7 @@ const Home = () => {
         hint = checkWarmerColder(currentYearDiff);
       }
       setPrevYearDiff(currentYearDiff);
-      const message = `Incorrect! ${hint}`;
-      setMessage(message, "warning");
+      setMessage({ message: `Incorrect! ${hint}`, variant: "warning" });
     }
     event.preventDefault();
     event.stopPropagation();
