@@ -24,7 +24,7 @@ const NavBar = () => {
             <Nav.Link variant="disabled">
               {user.displayName ? `Hi, ${user.displayName}` : user.email}
             </Nav.Link>
-            <Nav.Link onClick={signOut}>Log Out</Nav.Link>
+            <Nav.Link onClick={signOut} href={ROUTES.LANDING}>Log Out</Nav.Link>
           </>
         ) : (
           <Nav.Link href={ROUTES.LOGIN}>Login</Nav.Link>

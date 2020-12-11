@@ -13,7 +13,7 @@ const Login = () => {
   const passRef = useRef(null);
 
   const redirect = (user) => {
-    console.log(user);
+    // console.log(user);
     history.push(ROUTES.LANDING);
   };
 

@@ -16,8 +16,8 @@ import { getRandomShot, setScore } from "../../utils";
 import "./home.css";
 
 const radioButtons = [
-  { name: "Guess year", value: 1 },
-  { name: "Guess decade", value: 2 },
+  { name: "Guess year", value: "year" },
+  { name: "Guess decade", value: "decade" },
 ];
 
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
   const [points, setPoints] = useState(0);
   const [prevYearDiff, setPrevYearDiff] = useState(0);
   const [guessCount, setGuessCount] = useState(0);
-  const [radioValue, setRadioValue] = useState(1);
+  const [type, setType] = useState("year");
 
   const isDecade = shot && shot.decade;
 
@@ -37,6 +37,8 @@ const Home = () => {
     if (user && points != null) {
       if (!user.score || points > user.score) {
         setScore(points).then(console.log).catch(console.warn);
+      } else {
+        setPoints(user.score);
       }
     }
   }, [user, points]);
@@ -44,14 +46,14 @@ const Home = () => {
   useEffect(() => {
     if (!shot) {
       setLoading(true);
-      getRandomShot(radioValue === 2 ? "decade" : "year")
+      getRandomShot(type)
         .then((response) => response.json())
         .then((results) => {
           if (results) {
             if (results.success) {
               setShot(results.data);
               console.log(
-                isDecade
+                type === "decade"
                   ? `Decade: ${results.data.decade}`
                   : `Year: ${results.data.year}`
               );
@@ -66,7 +68,7 @@ const Home = () => {
           setLoading(false);
         });
     }
-  }, [shot, radioValue, isDecade]);
+  }, [shot, type, isDecade]);
 
   const nextShot = () => {
     formRef.current.reset();
@@ -80,8 +82,6 @@ const Home = () => {
       return shot.year === year;
     }
     if (shot.decade) {
-      // console.log(`Input: ${year}`)
-      // console.log(`Decade: ${shot.decade}`)
       return shot.decade <= year && year < shot.decade + 10;
     }
     return false;
@@ -101,7 +101,6 @@ const Home = () => {
     const guess = parseInt(form[0].value);
     let hint = "";
     setGuessCount(guessCount + 1);
-    // console.log(guessCount);
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
       addPoint(calcScore(guessCount));
@@ -109,12 +108,9 @@ const Home = () => {
     } else {
       let currentYearDiff = Math.abs(guess - shot.year);
       if (prevYearDiff) {
-        // console.log("IN IF");
         hint = checkWarmerColder(currentYearDiff);
-        // console.log("Hint!: " + hint);
       }
       setPrevYearDiff(currentYearDiff);
-      // console.log("Prev Year Diff: " + prevYearDiff);
       const message = `Incorrect! ${hint}`;
       setMessage(message);
     }
@@ -231,8 +227,11 @@ const Home = () => {
               variant="secondary"
               name="radio"
               value={radio.value}
-              checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
+              checked={type === radio.value}
+              onChange={(e) => {
+                setType(e.target.value);
+                nextShot();
+              }}
             >
               {radio.name}
             </ToggleButton>

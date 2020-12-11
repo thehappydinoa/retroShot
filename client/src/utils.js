@@ -10,12 +10,12 @@ const dev = false;
 
 const BASE_URL = dev ? URLS.dev : URLS.prod;
 
-const getRandomShot = (type = "year") => {
+const getRandomShot = (type = null) => {
   let url = `${BASE_URL}/shot/random`;
   if (type) {
     url += `?${new URLSearchParams({ type })}`;
   }
-  console.log(url);
+  // console.log(url);
   return fetch(url);
 };
 
@@ -32,7 +32,9 @@ const getScore = async () => {
     // redirect: "follow",
   };
 
-  return fetch(`${BASE_URL}/score`, requestOptions);
+  return fetch(`${BASE_URL}/score`, requestOptions)
+    .then((response) => response.json())
+    .then((json) => json.score);
 };
 
 const setScore = async (score) => {
