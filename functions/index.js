@@ -19,7 +19,15 @@ const scrape = functions.pubsub
   .schedule("0 18 * * *")
   .onRun((context) => scraper());
 
+const { createUser, deleteUser } = require("./user");
+
+const onSignup = functions.auth.user().onCreate((user) => createUser(user));
+
+const onDelete = functions.auth.user().onDelete((user) => deleteUser(user));
+
 module.exports = {
   api,
   scrape,
+  onSignup,
+  onDelete,
 };

@@ -137,14 +137,13 @@ getShots = async (req, res) => {
 
 getRandomShot = async (req, res) => {
   const shotType = req.query.type;
-  const decadeOnly = req.query.decadeOnly;
 
   let collectionRef = firestore.collection("shots");
 
   let queryRef = collectionRef;
 
-  if (!decadeOnly && shotType) {
-    queryRef = collectionRef.where(shotType, "!=", null);
+  if (shotType === "year") {
+    queryRef = collectionRef.where("year", "!=", null);
   }
 
   let querySnapshot = await queryRef.get();
@@ -166,7 +165,7 @@ getRandomShot = async (req, res) => {
     .get()
     .then((documentSnapshot) => {
       let data = documentSnapshot.data();
-      if (data.year) {
+      if (shotType === "decade" && data.year) {
         data.decade = parseInt(data.year / 10, 10) * 10;
         data.year = null;
       }
