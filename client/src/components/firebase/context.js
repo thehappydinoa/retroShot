@@ -9,10 +9,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      setUser(user);
       if (user) {
         user.score = await getScore();
       }
+      setUser(user);
     });
   }, []);
 
