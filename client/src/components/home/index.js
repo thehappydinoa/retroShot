@@ -8,14 +8,20 @@ import {
   Button,
   ButtonGroup,
   Alert,
-  ToggleButton
+  ToggleButton,
 } from "react-bootstrap";
-// import ls from "local-storage";
-import { getRandomShot } from "../../utils";
+import { useAuthContext } from "../firebase";
+import { getRandomShot, setScore } from "../../utils";
 
 import "./home.css";
 
+const radioButtons = [
+  { name: "Guess year", value: 1 },
+  { name: "Guess decade", value: 2 },
+];
+
 const Home = () => {
+  const { user } = useAuthContext();
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [shot, setShot] = useState(null);
@@ -23,21 +29,44 @@ const Home = () => {
   const [points, setPoints] = useState(0);
   const [prevYearDiff, setPrevYearDiff] = useState(0);
   const [guessCount, setGuessCount] = useState(0);
+  const [radioValue, setRadioValue] = useState(1);
+
+  const isDecade = shot && shot.decade;
+
+  useEffect(() => {
+    if (user && points != null) {
+      if (!user.score || points > user.score) {
+        setScore(points).then(console.log).catch(console.warn);
+      }
+    }
+  }, [user, points]);
 
   useEffect(() => {
     if (!shot) {
       setLoading(true);
-      getRandomShot()
+      getRandomShot(radioValue === 2 ? "decade" : "year")
         .then((response) => response.json())
         .then((results) => {
-          setShot(results.data);
-          setLoading(false);
+          if (results) {
+            if (results.success) {
+              setShot(results.data);
+              console.log(
+                isDecade
+                  ? `Decade: ${results.data.decade}`
+                  : `Year: ${results.data.year}`
+              );
+            } else {
+              setMessage(results.error);
+            }
+          } else {
+            setMessage("Could not load shot. Trying again in 3 seconds...");
+            setLoading(false);
+          }
 
-          const { year, decade } = results.data;
-          console.log(`Year: ${year} or Decade: ${decade}`);
+          setLoading(false);
         });
     }
-  }, [shot, setShot, setLoading]);
+  }, [shot, radioValue, isDecade]);
 
   const nextShot = () => {
     formRef.current.reset();
@@ -72,7 +101,7 @@ const Home = () => {
     const guess = parseInt(form[0].value);
     let hint = "";
     setGuessCount(guessCount + 1);
-    console.log(guessCount);
+    // console.log(guessCount);
     if (guess && checkYear(guess)) {
       setMessage("Correct!");
       addPoint(calcScore(guessCount));
@@ -98,7 +127,7 @@ const Home = () => {
 
   const round = (n, to) => n - (n % to);
 
-  //Maximum & minumum points alotted for a correct answer
+  // Maximum & minimum points allotted for a correct answer
   const maxPoints = 10;
   const minPoints = 1;
   const calcScore = (guessCnt) => Math.max(maxPoints - guessCnt, minPoints);
@@ -106,7 +135,10 @@ const Home = () => {
   const Title = () => (
     <Row className="justify-content-md-center">
       <Col xs="auto">
-        <h1>Can you guess what year this picture was taken?</h1>
+        <h1>
+          Can you guess what {isDecade ? "decade" : "year"} this picture was
+          taken?
+        </h1>
         <p>
           With pictures taken from{" "}
           <a
@@ -160,7 +192,7 @@ const Home = () => {
       <Form.Row className="justify-content-md-center">
         {/* <Col xs="auto"> */}
         <Col xs="auto" className="tr">
-          {shot && shot.decade ? "Decade" : "Year"}
+          {isDecade ? "Decade" : "Year"}
         </Col>
         <Col xs="auto">
           <Form.Control
@@ -170,9 +202,6 @@ const Home = () => {
             style={{ width: 100 }}
           />
         </Col>
-        {/* <Form.Label></Form.Label> */}
-
-        {/* </Col> */}
       </Form.Row>
       <br />
       <Form.Row className="justify-content-md-center">
@@ -190,18 +219,12 @@ const Home = () => {
     </Form>
   );
 
-
-  const [radioValue, setRadioValue] = useState('1');
-  const radios = [
-    { name: 'Guess year', value: '1' },
-    { name: 'Guess decade', value: '2' },
-  ];
   const Toggle = () => (
     <Row className="justify-content-md-center">
       <Col xs="auto">
-        <br />  
+        <br />
         <ButtonGroup toggle>
-          {radios.map((radio, idx) => (
+          {radioButtons.map((radio, idx) => (
             <ToggleButton
               key={idx}
               type="radio"
