@@ -25,9 +25,10 @@ setUserScore = async (req, res) => {
       });
     })
     .catch((error) => {
-      warn("User's score not updated", { user: userId });
+      warn("User's score not updated", { user: userId, error });
       return res.status(404).json({
         success: false,
+        // FIXME: Exposure
         error,
         message: "User's score not updated!",
       });
