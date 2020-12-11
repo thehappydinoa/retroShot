@@ -44,8 +44,8 @@ const shotValidator = [
 const shotUpdaterValidator = [oneOf(shotValidator)];
 
 const getShotValidator = [
-  query("type").optional().isIn(["year", "decade"]).isString()
-]
+  query("type").optional().isIn(["year", "decade"]).isString(),
+];
 
 module.exports = {
   validatePostId,
