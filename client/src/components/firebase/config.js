@@ -3,10 +3,10 @@ import "firebase/auth";
 
 var firebaseConfig = {
   apiKey: "***REMOVED***",
-  authDomain: "***REMOVED***",
-  databaseURL: "***REMOVED***",
-  projectId: "***REMOVED***",
-  storageBucket: "***REMOVED***.appspot.com",
+  authDomain: "retroshot-6a964.firebaseapp.com",
+  databaseURL: "https://retroshot-6a964.firebaseio.com",
+  projectId: "retroshot-6a964",
+  storageBucket: "retroshot-6a964.appspot.com",
   messagingSenderId: "***REMOVED***",
   appId: "1:***REMOVED***:web:232bff9afa8355afb065be",
   measurementId: "***REMOVED***",

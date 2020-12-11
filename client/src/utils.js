@@ -1,8 +1,8 @@
 import { auth } from "./components/firebase/config";
 
 const URLS = {
-  dev: "http://localhost:5001/***REMOVED***/us-central1/api",
-  prod: "https://us-central1-***REMOVED***.cloudfunctions.net/api",
+  dev: "http://localhost:5001/retroshot-6a964/us-central1/api",
+  prod: "https://us-central1-retroshot-6a964.cloudfunctions.net/api",
 };
 
 // Set true for dev

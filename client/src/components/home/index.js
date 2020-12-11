@@ -31,7 +31,7 @@ const Home = () => {
   const [guessCount, setGuessCount] = useState(0);
   const [type, setType] = useState("year");
 
-  const isDecade = shot && shot.decade;
+  const isDecade = type === "decade";
 
   useEffect(() => {
     if (user && points != null) {
@@ -53,7 +53,7 @@ const Home = () => {
             if (results.success) {
               setShot(results.data);
               console.log(
-                type === "decade"
+                isDecade
                   ? `Decade: ${results.data.decade}`
                   : `Year: ${results.data.year}`
               );

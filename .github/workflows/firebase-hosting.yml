@@ -28,6 +28,6 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_RETROSHOT_6A964 }}"
           channelId: live
-          projectId: ***REMOVED***
+          projectId: retroshot-6a964
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
