@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import * as ROUTES from "../../routes";
-import { withFirebase } from "../firebase";
+import { useAuthContext, signOut } from "../firebase";
 
-const NavBar = ({ firebase }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    firebase.auth.onAuthStateChanged(setUser);
-  }, [firebase, setUser]);
-
+const NavBar = () => {
+  const { user } = useAuthContext();
   return (
     <Navbar bg="light" variant="light">
       <Navbar.Brand href={ROUTES.LANDING}>
@@ -25,9 +20,12 @@ const NavBar = ({ firebase }) => {
       <Nav>
         <Nav.Link href={ROUTES.LANDING}>New Game</Nav.Link>
         {user ? (
-          <Nav.Link variant="disabled" onClick={firebase.signOut}>
-            {user.displayName ? `Hi, ${user.displayName}` : user.email}
-          </Nav.Link>
+          <>
+            <Nav.Link variant="disabled">
+              {user.displayName ? `Hi, ${user.displayName}` : user.email}
+            </Nav.Link>
+            <Nav.Link onClick={signOut}>Log Out</Nav.Link>
+          </>
         ) : (
           <Nav.Link href={ROUTES.LOGIN}>Login</Nav.Link>
         )}
@@ -36,4 +34,4 @@ const NavBar = ({ firebase }) => {
   );
 };
 
-export default withFirebase(NavBar);
+export default NavBar;

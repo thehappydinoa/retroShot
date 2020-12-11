@@ -2,12 +2,12 @@ import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
-import { withFirebase } from "../firebase";
+import * as firebase from "../firebase";
 import * as ROUTES from "../../routes";
 import "./login.css";
 
-const Login = ({ firebase }) => {
-  let history = useHistory();
+const Login = () => {
+  const history = useHistory();
   const [message, setMessage] = useState(null);
   const userRef = useRef(null);
   const passRef = useRef(null);
@@ -111,4 +111,4 @@ const Login = ({ firebase }) => {
   );
 };
 
-export default withFirebase(Login);
+export default Login;

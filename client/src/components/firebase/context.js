@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import app, { auth } from "./config";
+import { getScore } from "../../utils";
 
-const FirebaseContext = React.createContext(null);
+export const AuthContext = React.createContext();
 
-export const withFirebase = Component => props => (
-  <FirebaseContext.Consumer>
-    {firebase => <Component {...props} firebase={firebase} />}
-  </FirebaseContext.Consumer>
-);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-export default FirebaseContext;
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      setUser(user);
+      if (user) {
+        user.score = await getScore();
+      }
+    });
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, app, auth }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuthContext = () => useContext(AuthContext);
+
+export default AuthContext;

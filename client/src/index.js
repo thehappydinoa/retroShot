@@ -4,12 +4,12 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 import App from "./components/app";
-import Firebase, { FirebaseContext } from "./components/firebase";
+import { AuthProvider } from "./components/firebase";
 
 ReactDOM.render(
-  <FirebaseContext.Provider value={new Firebase()}>
+  <AuthProvider>
     <App />
-  </FirebaseContext.Provider>,
+  </AuthProvider>,
   document.getElementById("root")
 );
 
